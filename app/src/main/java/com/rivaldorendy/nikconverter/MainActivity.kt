@@ -1,15 +1,21 @@
 package com.rivaldorendy.nikconverter
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
+import com.rivaldorendy.nik_converter.NIKConverter
+import com.rivaldorendy.nik_converter.NIKData
 import com.rivaldorendy.nikconverter.ui.theme.NIKConverterTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,12 +23,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             NIKConverterTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    ConverterScreen()
                 }
             }
         }
@@ -30,17 +35,91 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+fun ConverterScreen() {
+    val context = LocalContext.current
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    NIKConverterTheme {
-        Greeting("Android")
+    var nik by remember { mutableStateOf("") }
+    var nikData by remember {
+        mutableStateOf(
+            NIKData(
+                province = "",
+                city = "",
+                district = "",
+                districtPostalCode = "",
+                gender = "",
+                birthDay = 0,
+                birthMonth = "",
+                birthYear = 0,
+                birthdayCountdown = "",
+                age = "",
+                zodiacSign = "",
+                chineseZodiac = "",
+                uniqueCode = ""
+            )
+        )
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        OutlinedTextField(
+            value = nik,
+            onValueChange = { nik = it },
+            label = { Text("Enter NIK") }
+        )
+
+        Text(
+            text = "Province: ${nikData.province}",
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Text(
+            text = "City: ${nikData.city}",
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Text(
+            text = "District: ${nikData.district}",
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Text(
+            text = "Postal Code: ${nikData.districtPostalCode}",
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Text(
+            text = "Gender: ${nikData.gender}",
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Text(
+            text = "Birth Date: ${nikData.birthDay}/${nikData.birthMonth}/${nikData.birthYear}",
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Text(
+            text = "Age: ${nikData.age}",
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Text(
+            text = "Zodiac Sign: ${nikData.zodiacSign}",
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Text(
+            text = "Chinese Zodiac: ${nikData.chineseZodiac}",
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Text(
+            text = "Unique Code: ${nikData.uniqueCode}",
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Button(
+            onClick = {
+                if(NIKConverter().convert(nik, context) != null){
+                    nikData = NIKConverter().convert(nik, context)!!
+                }
+                Toast.makeText(context, "invalid NIK", Toast.LENGTH_SHORT).show()
+            }
+        ) {
+            Text(text = "Convert NIK")
+        }
     }
 }
