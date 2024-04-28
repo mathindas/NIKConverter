@@ -1,3 +1,8 @@
+[![](https://jitpack.io/v/mathindas/NIKConverter.svg)](https://jitpack.io/#mathindas/NIKConverter)
+
+# Formula
+![nomor_induk_kependudukan](https://user-images.githubusercontent.com/41590940/202644369-3667a95b-eb71-48a5-82dc-09a1c4620a48.jpg)
+
 # NIK Converter Library (FULL OFFLINE)
 
 Welcome to the NIK Converter Library, your go-to solution for parsing Indonesian National Identification Numbers (NIK) and extracting insightful data from them!
@@ -32,7 +37,7 @@ To integrate the NIK Converter Library into your Android project, follow these s
 
     ```gradle
     dependencies {
-        implementation 'com.github.mathindas:nik-converter:1.0.0'
+        implementation 'com.github.mathindas:nik-converter:1.0.6'
     }
     ```
 
@@ -79,6 +84,8 @@ if (nikData != null) {
     println("Invalid NIK.")
 }
 ```
+## Example Screenshot
+![12](https://user-images.githubusercontent.com/41590940/203917165-77087f30-779c-45be-93c5-d9207f8cd0aa.png)
 
 ## Contribution
 
