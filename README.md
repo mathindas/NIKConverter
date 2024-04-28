@@ -37,7 +37,7 @@ To integrate the NIK Converter Library into your Android project, follow these s
 
     ```gradle
     dependencies {
-        implementation 'com.github.mathindas:nik-converter:1.0.6'
+        implementation 'com.github.mathindas:nik-converter:1.0.7'
     }
     ```
 
@@ -47,7 +47,7 @@ Here's a quick example of how to use the NIK Converter Library in your Android p
 
 ## Examples
 
-### Basic Conversion
+### Conversion
 
 ```kotlin
 val nikConverter = NIKConverter()
@@ -55,35 +55,29 @@ val nik = "your_nik_string_here"
 val context = applicationContext // or any valid context
 
 val nikData = nikConverter.convert(nik, context)
+// val nikData = nikConverter.convert(nik, context, translateToId = true) // use this if you want to translate to indonesian
 
 if (nikData != null) {
-    // Access NIK data fields here
-    println("Province: ${nikData.province}")
-    println("City: ${nikData.city}")
-    // Add more data fields as needed
+   // Print all NIK data fields
+   println("Province: ${nikData.province}")
+   println("City: ${nikData.city}")
+   println("District: ${nikData.district}")
+   println("District Postal Code: ${nikData.districtPostalCode}")
+   println("Gender: ${nikData.gender}")
+   println("Birth Date: ${nikData.birthDate}")
+   println("Birth Month: ${nikData.birthMonth}")
+   println("Birth Year: ${nikData.birthYear}")
+   println("Birth Day: ${nikData.birthDay}")
+   println("Birthday Countdown: ${nikData.birthdayCountdown}")
+   println("Age: ${nikData.age}")
+   println("Zodiac Sign: ${nikData.zodiacSign}")
+   println("Chinese Zodiac: ${nikData.chineseZodiac}")
+   println("Unique Code: ${nikData.uniqueCode}")
 } else {
     println("Invalid NIK.")
 }
 ```
 
-### Custom Translation
-
-```kotlin
-val nikConverter = NIKConverter()
-val nik = "your_nik_string_here"
-val context = applicationContext // or any valid context
-
-val nikData = nikConverter.convert(nik, context, translateToId = true) // translate to indonesian
-
-if (nikData != null) {
-    // Access NIK data fields here with translated values
-    println("Province: ${nikData.province}")
-    println("City: ${nikData.city}")
-    // Add more data fields as needed
-} else {
-    println("Invalid NIK.")
-}
-```
 ## Example Screenshot
 ![ss](https://raw.githubusercontent.com/mathindas/NIKConverter/main/sample/ss.png)
 
