@@ -37,7 +37,7 @@ To integrate the NIK Converter Library into your Android project, follow these s
 
     ```gradle
     dependencies {
-        implementation 'com.github.mathindas:nik-converter:1.0.6'
+        implementation 'com.github.mathindas:nikconverter:1.0.6'
     }
     ```
 
