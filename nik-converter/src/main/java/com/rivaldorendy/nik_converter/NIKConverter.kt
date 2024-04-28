@@ -22,8 +22,8 @@ class NIKConverter {
         return getNikData(nik, context, translateToId)
     }
 
-    fun getNikData(nik: String, context: Context, translateToId : Boolean = false): NIKData? {
-        var nikData: NIKData? = null
+    private fun getNikData(nik: String, context: Context, translateToId : Boolean = false): NIKData? {
+        var nikData: NIKData?
 
         try {
             val provinceCode = nik.substring(0, 2)
@@ -42,16 +42,17 @@ class NIKConverter {
             val districtPostalCode = district.last()
 
             val gender = getGender(birthDateCode, translateToId)
-            val birthDay = if (birthDateCode < 41) birthDateCode else (birthDateCode - 40)
+            val birthDate = if (birthDateCode < 41) birthDateCode else (birthDateCode - 40)
             val birthMonth = getMonth(birthMonthCode, translateToId)
             val birthYear = getYear(birthYearCode)
-            val birthdayCountdown = getBirthdayCountdown(birthMonthCode, birthDay, translateToId)
-            val age = getAge(birthYear, birthMonthCode, birthDay, translateToId)
-            val zodiacSign = getZodiacSign(birthMonthCode, birthDay)
+            val birthDay = getDayOfWeek(birthYear, birthMonthCode, birthDate, translateToId)
+            val birthdayCountdown = getBirthdayCountdown(birthMonthCode, birthDate, translateToId)
+            val age = getAge(birthYear, birthMonthCode, birthDate, translateToId)
+            val zodiacSign = getZodiacSign(birthMonthCode, birthDate)
             val chineseZodiac = getChineseZodiac(birthYear, translateToId)
 
             if (province.equals(null) || city.equals(null) || district.equals(null) ||
-                birthDay > 31 || birthMonthCode > 12
+                birthDate > 31 || birthMonthCode > 12
             ) return null
 
             nikData = NIKData(
@@ -60,9 +61,10 @@ class NIKConverter {
                 districtName,
                 districtPostalCode,
                 gender,
-                birthDay,
+                birthDate,
                 birthMonth,
                 birthYear,
+                birthDay,
                 birthdayCountdown,
                 age,
                 zodiacSign,

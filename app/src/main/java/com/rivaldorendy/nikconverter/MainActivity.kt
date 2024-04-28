@@ -47,9 +47,10 @@ fun ConverterScreen() {
                 district = "",
                 districtPostalCode = "",
                 gender = "",
-                birthDay = 0,
+                birthDate = 0,
                 birthMonth = "",
                 birthYear = 0,
+                birthDay = "",
                 birthdayCountdown = "",
                 age = "",
                 zodiacSign = "",
@@ -92,7 +93,7 @@ fun ConverterScreen() {
             style = MaterialTheme.typography.bodyMedium
         )
         Text(
-            text = "Birth Date: ${nikData.birthDay}/${nikData.birthMonth}/${nikData.birthYear}",
+            text = "Birth Date: ${nikData.birthDay} ${nikData.birthDate}/${nikData.birthMonth}/${nikData.birthYear}",
             style = MaterialTheme.typography.bodyMedium
         )
         Text(
