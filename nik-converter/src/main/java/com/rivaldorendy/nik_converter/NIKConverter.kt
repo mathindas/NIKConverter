@@ -122,11 +122,16 @@ class NIKConverter {
     }
 
     fun getYear(year: Int): Int {
+        val formattedYear = when {
+            year < 10 -> "0$year"
+            else -> year.toString()
+        }
         return when (year) {
-            in 1..21 -> "20$year".toInt()
-            else -> "19$year".toInt()
+            in 0..21 -> "20$formattedYear".toInt()
+            else -> "19$formattedYear".toInt()
         }
     }
+
 
     fun getAge(year: Int, month: Int, dayOfMonth: Int, translateToId: Boolean): String {
         val period = Period.between(LocalDate.of(year, month, dayOfMonth), LocalDate.now())
